@@ -27,7 +27,6 @@ ENV PG_SHA256 1738da8e1e59d4f2dc69c216e67100c6d4dad46714cf597cc2db66077204d31f
 
 RUN set -ex \
 	#&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
-	&& up=`ip route | awk 'NR==1 {print $3}'` \
 	\
 	&& apk add --no-cache --virtual .fetch-deps \
 		ca-certificates \
@@ -53,7 +52,8 @@ RUN set -ex \
 		gcc \
         g++ \
 		clang \
-		llvm5-dev \
+		llvm-dev \
+		llvm \
 #		krb5-dev \
 		libc-dev \
 		libedit-dev \
@@ -185,7 +185,6 @@ RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PG
 VOLUME /var/lib/postgresql/data
 
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
