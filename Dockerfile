@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM python:3.7.3-alpine3.10
+FROM python:3.7.4-alpine3.10
 
 # alpine includes "postgres" user/group in base install
 #   /etc/passwd:22:postgres:x:70:70::/var/lib/postgresql:/bin/sh
