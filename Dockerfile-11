@@ -162,16 +162,16 @@ RUN set -ex \
 	&& make install \
 	&& cd / && [[ -d timescaledb ]] && rm -rf timescaledb \
 	\
-    && git clone https://github.com/jaiminpan/pg_jieba \
-    && cd pg_jieba \
-    && git submodule update --init --recursive \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
-    && make \
-    && make install \
-    && cd ../.. \
-    && rm -rf pg_jieba \
+    # && git clone https://github.com/jaiminpan/pg_jieba \
+    # && cd pg_jieba \
+    # && git submodule update --init --recursive \
+    # && mkdir build \
+    # && cd build \
+    # && cmake .. \
+    # && make \
+    # && make install \
+    # && cd ../.. \
+    # && rm -rf pg_jieba \
     \
 	&& apk del .fetch-deps .build-deps \
 	&& cd / \
@@ -191,7 +191,7 @@ ENV PGDATA /var/lib/postgresql/data
 RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA"
 VOLUME /var/lib/postgresql/data
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint-11.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
