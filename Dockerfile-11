@@ -154,8 +154,9 @@ RUN set -ex \
 	# && psql DB -c "CREATE EXTENSION rum;" \
 	&& cd / && [[ -d rum ]] && rm -rf rum \
     \
-	&& wget -O- https://github.com/timescale/timescaledb/archive/1.4.0.tar.gz | tar zxf - \
-    && mv timescaledb-1.4.0 timescaledb \
+	&& timescaledb_version=1.4.1 \
+	&& wget -O- https://github.com/timescale/timescaledb/archive/${timescaledb_version}.tar.gz | tar zxf - \
+    && mv timescaledb-${timescaledb_version} timescaledb \
 	&& cd timescaledb \
 	&& ./bootstrap \
 	&& cd build && make \
