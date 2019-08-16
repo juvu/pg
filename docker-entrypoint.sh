@@ -124,6 +124,7 @@ if [ "$1" = 'postgres' ]; then
 		### my extensions
 		{
 			echo
+			echo "wal_level = logical"
 			echo "shared_preload_libraries = 'pg_stat_statements'  #,timescaledb,pg_jieba.so"
 			#echo "jit_provider = 'llvmjit'"
 		} >> "$PGDATA/postgresql.conf"
