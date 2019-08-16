@@ -153,6 +153,12 @@ RUN set -ex \
 	# && make USE_PGXS=1 installcheck \
 	# && psql DB -c "CREATE EXTENSION rum;" \
 	&& cd / && [[ -d rum ]] && rm -rf rum \
+	\
+	&& git clone https://github.com/eulerto/wal2json.git \
+	&& cd wal2json \
+	&& USE_PGXS=1 make \
+	&& USE_PGXS=1 make install \
+	&& cd / && [[ -d wal2json ]] && rm -rf wal2json \
     \
 	&& timescaledb_version=1.4.1 \
 	&& wget -O- https://github.com/timescale/timescaledb/archive/${timescaledb_version}.tar.gz | tar zxf - \
