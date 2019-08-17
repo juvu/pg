@@ -121,7 +121,7 @@ if [ "$1" = 'postgres' ]; then
 			echo "host all all all $authMethod"
 		} >> "$PGDATA/pg_hba.conf"
 
-		### my extensions
+		###
 		{
 			echo
 			echo "wal_level = logical"
