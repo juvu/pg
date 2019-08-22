@@ -26,7 +26,7 @@ ENV PG_VERSION 12beta3
 ENV PG_SHA256 e4a4079c75bf049349c70a02f705beecbb8263684ff2d4e13a582a3ff50332aa
 
 RUN set -ex \
-	#&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
+	&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
 	\
 	&& apk add --no-cache --virtual .fetch-deps \
 		ca-certificates \
@@ -157,20 +157,20 @@ RUN set -ex \
 	## && make USE_PGXS=1 installcheck \
 	## && psql DB -c "CREATE EXTENSION rum;" \
 	#&& cd / && [[ -d rum ]] && rm -rf rum \
-    #  \
-	#  && git clone https://github.com/eulerto/wal2json.git \
-	#  && cd wal2json \
-	#  && USE_PGXS=1 make \
-	#  && USE_PGXS=1 make install \
-	#  && cd / && [[ -d wal2json ]] && rm -rf wal2json \
-    #  \
-	#&& wget -O- https://github.com/timescale/timescaledb/archive/1.3.0.tar.gz | tar zxf - \
-    #&& mv timescaledb-1.3.0 timescaledb \
-	#&& cd timescaledb \
-	#&& ./bootstrap \
-	#&& cd build && make \
-	#&& make install \
-	#&& cd / && [[ -d timescaledb ]] && rm -rf timescaledb \
+      \
+	  && git clone https://github.com/eulerto/wal2json.git \
+	  && cd wal2json \
+	  && USE_PGXS=1 make \
+	  && USE_PGXS=1 make install \
+	  && cd / && [[ -d wal2json ]] && rm -rf wal2json \
+      \
+	&& wget -O- https://github.com/timescale/timescaledb/archive/1.3.0.tar.gz | tar zxf - \
+    	&& mv timescaledb-1.3.0 timescaledb \
+	&& cd timescaledb \
+	&& ./bootstrap \
+	&& cd build && make \
+	&& make install \
+	&& cd / && [[ -d timescaledb ]] && rm -rf timescaledb \
 	\
 	&& apk del .fetch-deps .build-deps \
 	&& cd / \
